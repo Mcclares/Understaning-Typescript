@@ -1,154 +1,45 @@
-// Intersection
-// interface Admin  {
-//     name: string;
-//     priviliges: string[];
+// const add = (a:number, b:number = 1) => { 
+//     return a + b;
+
 // };
-// interface Employee  {
-//     name: string;
-//     startDate: Date;
-// }
-// interface ElevatedEmployee extends Employee, Admin { };
+// console.log(add(2));
+// const printOut: (a: number | string) => void = output => console.log(output);
+
+const hobbies = ["sports", "reading","swimming"];
+const activeHobbies = ["Hiking", ...hobbies];
+activeHobbies.push(...hobbies);
 
 
-// type ElevatedEmployee = Admin & Employee;
-
-type Admin =  {
-    name: string;
-    priviliges: string[];
+const person = {
+    fistName: "Max",
+    age: 30
 };
-type Employee =  {
-    name: string;
-    startDate: Date;
-}
-
-type ElevatedEmployee = Employee & Admin;
-
-const e1: ElevatedEmployee = {
-    name: 'Max',
-    startDate: new Date(),
-    priviliges: ["create-server"]
-
-}
-type Combinable = string | number;
-type Numeric = number | boolean;
-
-type Universal = Combinable & Numeric;
-
-
-
-function add(a: number, b: number): number;
-function add(a: string, b: string): string;
-function add(a: string, b: number): string;
-function add(a: number, b: string): string;
-
-
-function add(a: Combinable, b: Combinable) {
-    if (typeof a === "string" || typeof b === 'string') {
-        return a.toString() + b.toString();
-    }
-    return a + b;
-}
-console.log(add("as", 5));
-const result = add('Max', 'Schwarz');
-result.split(' ');
-
-const fetchedUserData = {
-    id: 'u1',
-    name: 'Max',
-    job: { title: 'CEO', description: "My own company" }
+const copiedPerson = {
+    ...person
 };
 
-console.log(fetchedUserData?.job?.title);
+// ... знак копирует полностью, а не ссылается на файл
+const button = document.querySelector("button")!;
+button.addEventListener('click', event => console.log(event));
 
-const userInput = "";
-const storedData = userInput ?? 'DEFAULT';
-console.log(storedData);
-// type UnknowEmployee = Employee | Admin;
-
-// function printEmployeeInformation(emp: UnknowEmployee) {
-//     console.log('Name: ' + emp.name);
-//     if ('priviliges' in emp) {
-//         console.log("Privileges: " + emp.priviliges);
-//     }
-//     if ('startDate' in emp) {
-//         console.log("StartDate: " + emp.startDate);
-//     }
-
-  
-
-// }
-// printEmployeeInformation(e1);
- 
-// class Car {
-//     drive() {
-//         console.log("Driving...");
-//     }
-
-// }
-// class Truck {
-//     drive() {
-//         console.log("Driving a truck...");
-//     }
-//     loadCargo(amount: number) {
-//         console.log('Loading cargo...' + amount);
-//     }
-
-// }
-// type Vehicle = Car | Truck;
-// const v1 = new Car();
-// const v2 = new Truck();
-
-// function useVehicle(vehicle: Vehicle) {
-//     vehicle.drive();
-//     if (vehicle instanceof Truck) {
-
-//         vehicle.loadCargo(1000);
-//     }
-
-// }
-// useVehicle(v1);
-// useVehicle(v2);
-// // typeGuardFunction 
-// interface Horse{
-//     type: 'horse';
-//     runningSpeed: number;
-
-// }
-// interface Bird {
-//     type: 'bird';
-//     flyingSpeed: number;
-
-// }
-
-// type Animal = Bird | Horse;
-
-// function moveAnimal(animal: Animal) {
-//     let speed;
-//     switch (animal.type) {
-//         case 'bird':
-//             speed = animal.flyingSpeed;
-//             break
-//         case "horse":
-//             speed = animal.runningSpeed;
-//             break
-
-//     }
-//     console.log("Moving at speed: " + speed);
-// }
-// moveAnimal({ type: 'bird', flyingSpeed: 10 });
-// // const userInputElement = <HTMLInputElement>document.getElementById("user-input")!;
-// const userInputElement = document.getElementById("user-input");
-
-// if (userInputElement) {
-//     (userInputElement as HTMLInputElement).value = "Hi, there";
-// }
-
-
-// interface ErrorContainer {
+// здесь знак ... показывает что есть непределенное значений параметров
+//const add = (...numbers: number[]) =>
+const add = (...numbers: number[]) => {
     
-//     [prop: string]: string;
-// }
-// const errorBag: ErrorContainer = {
-//     email: 'Not a valid email',
-//     username: 'Must start with a capital character'
-// };
+   return  numbers.reduce((curResult,curValue) => {
+        return curResult + curValue;
+    }, 0)
+
+
+};
+// Также необязательно создавать массив, достаточно просто написать в метод цифры или слова
+const addedNumbers = add(5, 10, 11);
+console.log(addedNumbers);
+//destructing
+
+const [hobby1, hobby2, ...remainingHobbies] = hobbies; // remainingHobbies - оставшиеся элементы
+console.log(hobby1, hobby2, hobbies);
+console.log(remainingHobbies[0]);
+
+const { fistName: userName, age } = person; //name override
+console.log(userName,age);
